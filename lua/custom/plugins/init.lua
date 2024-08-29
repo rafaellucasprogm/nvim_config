@@ -15,10 +15,12 @@ return {
       vim.g.barbar_auto_setup = false
     end,
     opts = {
-      -- lazy.nvim will automatically call setup for you. put your options here, anything missing will use the default:
-      -- animation = true,
-      -- insert_at_start = true,
-      -- …etc.
+      sidebar_filetypes = {
+        -- Set up for Neo-tree
+        ['neo-tree'] = {
+          event = 'BufWipeout', -- Event triggered when Neo-tree buffer is wiped out
+        },
+      },
     },
     version = '^1.0.0', -- optional: only update when a new 1.x version is released
   },
