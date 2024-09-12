@@ -3,25 +3,25 @@
 --
 -- See the kickstart.nvim README for more information
 return {
+  { 'echasnovski/mini.indentscope', version = false },
   { 'akinsho/toggleterm.nvim', version = '*', config = true },
 
   {
     'romgrk/barbar.nvim',
     dependencies = {
-      'lewis6991/gitsigns.nvim', -- OPTIONAL: for git status
-      'nvim-tree/nvim-web-devicons', -- OPTIONAL: for file icons
+      'lewis6991/gitsigns.nvim',
+      'nvim-tree/nvim-web-devicons',
     },
     init = function()
       vim.g.barbar_auto_setup = false
     end,
     opts = {
       sidebar_filetypes = {
-        -- Set up for Neo-tree
         ['neo-tree'] = {
-          event = 'BufWipeout', -- Event triggered when Neo-tree buffer is wiped out
+          event = 'BufWipeout',
         },
       },
     },
-    version = '^1.0.0', -- optional: only update when a new 1.x version is released
+    version = '^1.0.0',
   },
 }

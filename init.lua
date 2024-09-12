@@ -172,7 +172,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagn
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- ToggleTerm shit
-vim.api.nvim_set_keymap('n', 'tt', ':ToggleTerm<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>tt', ':ToggleTerm<CR>', { noremap = true, silent = true })
 
 -- BarBar keymaps
 vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>BufferNext<CR>', { noremap = true, silent = true })
@@ -808,6 +808,7 @@ require('lazy').setup({
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
 
   { 'catppuccin/nvim', name = 'catppuccin', priority = 1000 },
+
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -923,6 +924,23 @@ require('lazy').setup({
 
 local ls = require 'luasnip'
 ls.filetype_extend('eruby', { 'html' })
+
+require('lspconfig').solargraph.setup {
+  settings = {
+    solargraph = {
+      autoformat = false, -- Desativa autoformat
+      diagnostics = false, -- Mantém diagnósticos, caso queira
+    },
+  },
+  init_options = {
+    formatting = false, -- Desativa a formatação automática
+  },
+}
+
+require('toggleterm').setup {
+  direction = 'float',
+}
+require('mini.indentscope').setup()
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
