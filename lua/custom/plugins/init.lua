@@ -3,7 +3,6 @@
 --
 -- See the kickstart.nvim README for more information
 return {
-  { 'echasnovski/mini.indentscope', version = false },
   { 'akinsho/toggleterm.nvim', version = '*', config = true },
 
   {
