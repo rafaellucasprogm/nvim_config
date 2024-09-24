@@ -181,6 +181,8 @@ vim.api.nvim_set_keymap('n', '<leader>tt', ':ToggleTerm<CR>', { noremap = true, 
 vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>BufferNext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<S-Tab>', '<Cmd>BufferPrevious<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-c>', '<Cmd>BufferClose<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-q>', '<Cmd>BufferMovePrevious<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-w>', '<Cmd>BufferMoveNext<CR>', { noremap = true, silent = true })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -206,7 +208,7 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Neotree keys
-vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>e', ':lua MiniFiles.open()<CR>', { noremap = true, silent = true })
 -- vim.keymap.set('n', '\\', ':Neotree reveal<CR>', { noremap = true, silent = true })
 
 -- [[ Basic Autocommands ]]
@@ -835,6 +837,7 @@ require('lazy').setup({
       require('mini.indentscope').setup()
       require('mini.pairs').setup()
       require('mini.move').setup()
+      require('mini.files').setup()
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
@@ -901,8 +904,8 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  require 'kickstart.plugins.neo-tree',
-  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  -- require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
@@ -933,6 +936,7 @@ require('lazy').setup({
 
 local ls = require 'luasnip'
 ls.filetype_extend('eruby', { 'html' })
+ls.filetype_extend('htmldjango', { 'html' })
 
 require('lspconfig').solargraph.setup {
   settings = {
