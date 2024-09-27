@@ -208,8 +208,8 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Neotree keys
-vim.keymap.set('n', '<leader>e', ':lua MiniFiles.open()<CR>', { noremap = true, silent = true })
--- vim.keymap.set('n', '\\', ':Neotree reveal<CR>', { noremap = true, silent = true })
+-- vim.keymap.set('n', '<leader>e', ':lua MiniFiles.open()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '\\', ':Neotree toggle<CR>', { noremap = true, silent = true })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -837,7 +837,6 @@ require('lazy').setup({
       require('mini.indentscope').setup()
       require('mini.pairs').setup()
       require('mini.move').setup()
-      require('mini.files').setup()
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
@@ -904,8 +903,8 @@ require('lazy').setup({
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
-  require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
+  require 'kickstart.plugins.neo-tree',
+  -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
@@ -938,15 +937,13 @@ local ls = require 'luasnip'
 ls.filetype_extend('eruby', { 'html' })
 ls.filetype_extend('htmldjango', { 'html' })
 
-require('lspconfig').solargraph.setup {
+require('lspconfig').pylsp.setup {
   settings = {
-    solargraph = {
-      autoformat = false, -- Desativa autoformat
-      diagnostics = false, -- Mantém diagnósticos, caso queira
+    pylsp = {
+      plugins = {
+        pycodestyle = { ignore = { 'E501' } },
+      },
     },
-  },
-  init_options = {
-    formatting = false, -- Desativa a formatação automática
   },
 }
 

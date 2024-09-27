@@ -5,6 +5,7 @@
 return {
   { 'akinsho/toggleterm.nvim', version = '*', config = true },
 
+
   {
     'romgrk/barbar.nvim',
     dependencies = {
