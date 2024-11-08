@@ -95,7 +95,10 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
 -- Keymap save
-vim.api.nvim_set_keymap('n', '<A-s>', ':w<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-s>', ':w<CR>', { noremap = true, silent = true })
+
+-- ; to :
+vim.api.nvim_set_keymap('n', ';', ':', { noremap = true, silent = false })
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
@@ -948,10 +951,6 @@ require('lspconfig').pylsp.setup {
       },
     },
   },
-}
-
-require('toggleterm').setup {
-  direction = 'float',
 }
 
 -- vim.cmd 'BufferClose'
