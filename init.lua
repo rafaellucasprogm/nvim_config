@@ -181,8 +181,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.api.nvim_set_keymap('n', '<leader>tt', ':ToggleTerm<CR>', { noremap = true, silent = true })
 
 -- BarBar keymaps
-vim.api.nvim_set_keymap('n', '<S-Tab>', '<Cmd>bnext<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>bprevious<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>bnext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Tab>', '<Cmd>bprevious<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-c>', '<Cmd>bd<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-w>', '<Cmd>BufferLineMoveNext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-q>', '<Cmd>BufferLineMovePrev<CR>', { noremap = true, silent = true })
