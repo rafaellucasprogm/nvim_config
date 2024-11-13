@@ -174,16 +174,15 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+-- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
--- ToggleTerm shit
-vim.api.nvim_set_keymap('n', '<leader>tt', ':ToggleTerm<CR>', { noremap = true, silent = true })
-
--- BarBar keymaps
-vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>bnext<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<S-Tab>', '<Cmd>bprevious<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-c>', '<Cmd>bd<CR>', { noremap = true, silent = true })
+-- BufferLine keymaps
+-- vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>bnext<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>bprevious<CR>', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<A-c>', '<Cmd>bd<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>BufferLinePick<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-c>', '<Cmd>BufferLinePickClose<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-w>', '<Cmd>BufferLineMoveNext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-q>', '<Cmd>BufferLineMovePrev<CR>', { noremap = true, silent = true })
 
@@ -211,7 +210,6 @@ vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower win
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- Neotree keys
--- vim.keymap.set('n', '<leader>e', ':lua MiniFiles.open()<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { noremap = true, silent = true })
 
 -- [[ Basic Autocommands ]]
@@ -844,6 +842,7 @@ require('lazy').setup({
       require('mini.indentscope').setup()
       require('mini.pairs').setup()
       require('mini.move').setup()
+
       -- Simple and easy statusline.
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
@@ -961,12 +960,11 @@ bufferline.setup {
       {
         filetype = 'neo-tree', -- Specifies the filetype of the sidebar you want to offset
         text = 'File Explorer', -- Title text shown in the bufferline
-        text_align = 'left', -- Position of the text ("left", "center", "right")
+        text_align = 'center', -- Position of the text ("left", "center", "right")
         separator = true, -- Whether to show a separator between the bufferline and the sidebar
       },
     },
   },
 }
-
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
