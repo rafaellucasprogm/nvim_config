@@ -181,11 +181,11 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.api.nvim_set_keymap('n', '<leader>tt', ':ToggleTerm<CR>', { noremap = true, silent = true })
 
 -- BarBar keymaps
-vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>BufferNext<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<S-Tab>', '<Cmd>BufferPrevious<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-c>', '<Cmd>BufferClose<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-q>', '<Cmd>BufferMovePrevious<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<A-w>', '<Cmd>BufferMoveNext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<S-Tab>', '<Cmd>bnext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>bprevious<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-c>', '<Cmd>bd<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-w>', '<Cmd>BufferLineMoveNext<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-q>', '<Cmd>BufferLineMovePrev<CR>', { noremap = true, silent = true })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -953,7 +953,20 @@ require('lspconfig').pylsp.setup {
   },
 }
 
--- vim.cmd 'BufferClose'
+local bufferline = require 'bufferline'
+bufferline.setup {
+  options = {
+    -- other bufferline options
+    offsets = {
+      {
+        filetype = 'neo-tree', -- Specifies the filetype of the sidebar you want to offset
+        text = 'File Explorer', -- Title text shown in the bufferline
+        text_align = 'left', -- Position of the text ("left", "center", "right")
+        separator = true, -- Whether to show a separator between the bufferline and the sidebar
+      },
+    },
+  },
+}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
