@@ -123,8 +123,9 @@ vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.opt.clipboard = 'unnamedplus'
-
+vim.schedule(function()
+  vim.opt.clipboard = 'unnamedplus'
+end)
 -- Enable break indent
 vim.opt.breakindent = true
 
@@ -185,6 +186,7 @@ vim.api.nvim_set_keymap('n', '<Tab>', '<Cmd>BufferLinePick<CR>', { noremap = tru
 vim.api.nvim_set_keymap('n', '<A-c>', '<Cmd>BufferLinePickClose<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-w>', '<Cmd>BufferLineMoveNext<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<A-q>', '<Cmd>BufferLineMovePrev<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<A-o>', '<Cmd>BufferLineCloseOthers<CR>', { noremap = true, silent = true })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -442,6 +444,8 @@ require('lazy').setup({
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
       { 'j-hui/fidget.nvim', opts = {} },
 
+      -- Allows extra capabilities provided by nvim-cmp
+      'hrsh7th/cmp-nvim-lsp',
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
       { 'folke/neodev.nvim', opts = {} },
@@ -959,12 +963,23 @@ bufferline.setup {
     offsets = {
       {
         filetype = 'neo-tree', -- Specifies the filetype of the sidebar you want to offset
-        text = 'File Explorer', -- Title text shown in the bufferline
+        text = '', -- Title text shown in the bufferline
         text_align = 'center', -- Position of the text ("left", "center", "right")
-        separator = true, -- Whether to show a separator between the bufferline and the sidebar
+        separator = false, -- Whether to show a separator between the bufferline and the sidebar
       },
     },
   },
 }
+vim.api.nvim_create_augroup('neotree_autoopen', { clear = true })
+vim.api.nvim_create_autocmd('BufWinEnter', {
+  desc = 'Open neo-tree on enter',
+  group = 'neotree_autoopen',
+  callback = function()
+    if not vim.g.neotree_opened then
+      vim.cmd 'Neotree show'
+      vim.g.neotree_opened = true
+    end
+  end,
+})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
