@@ -3,5 +3,7 @@
 --
 -- See the kickstart.nvim README for more information
 return {
+  { 'karb94/neoscroll.nvim', opts = {} },
+
   { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons' },
 }
