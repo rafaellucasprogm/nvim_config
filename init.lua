@@ -954,30 +954,5 @@ require('lspconfig').pylsp.setup {
   },
 }
 
-local bufferline = require 'bufferline'
-bufferline.setup {
-  options = {
-    -- other bufferline options
-    offsets = {
-      {
-        filetype = 'neo-tree', -- Specifies the filetype of the sidebar you want to offset
-        text = '', -- Title text shown in the bufferline
-        text_align = 'center', -- Position of the text ("left", "center", "right")
-        separator = false, -- Whether to show a separator between the bufferline and the sidebar
-      },
-    },
-  },
-}
-vim.api.nvim_create_augroup('neotree_autoopen', { clear = true })
-vim.api.nvim_create_autocmd('BufWinEnter', {
-  desc = 'Open neo-tree on enter',
-  group = 'neotree_autoopen',
-  callback = function()
-    if not vim.g.neotree_opened then
-      vim.cmd 'Neotree show'
-      vim.g.neotree_opened = true
-    end
-  end,
-})
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
